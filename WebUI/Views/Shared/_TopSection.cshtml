@@ -1,0 +1,97 @@
+﻿<div class="head-wrap">
+    <div class="top-head-hidden">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="empty" class="empty">
+                        <h2>Your cart is currently empty.</h2>
+                        <p>Continue browsing <a href="#">here</a>.</p>
+                    </div>
+                    <div class="basket">
+                        <h1>Shopping Cart<i class="fa fa-times close-basket"></i></h1>
+                        <div class="wrap-cart-products">
+                            <ul class="cart-product">
+                                <li>
+                                    <a href="#"><img src="~/Assets/img/basket-item.png"></a>
+                                </li>
+                                <li>
+                                    <h4><a href="#">SUMIRE 菫 (VIOLA FLOWER) PURPLE - PURPLE BEZEL</a></h4>
+                                    <p class="size">Medium / Purple</p>
+                                    <span class="remove"><a href="#">Remove</a></span>
+                                </li>
+                                <div class="clear visible-xs"></div>
+                                <li>
+                                    <p class="visible-xs">Price</p>
+                                    <span class="price">$45.00</span>
+                                </li>
+                                <li>
+                                    <p class="visible-xs">Quantity</p>
+                                    <a class="count" href="#">-</a>
+                                    <span>2</span>
+                                    <a class="count" href="#">+</a>
+                                </li>
+                                <li>
+                                    <p class="visible-xs">Total</p>
+                                    <span class="total">$90.00</span>
+                                </li>
+                            </ul>
+                            <ul class="cart-product">
+                                <li>
+                                    <a href="#"><img src="~/Assets/img/basket-item.png"></a>
+                                </li>
+                                <li>
+                                    <h4><a href="#">SUMIRE 菫 (VIOLA FLOWER) PURPLE - PURPLE BEZEL</a></h4>
+                                    <p class="size">Medium / Purple</p>
+                                    <span class="remove"><a href="#">Remove</a></span>
+                                </li>
+                                <div class="clear visible-xs"></div>
+                                <li>
+                                    <p class="visible-xs">Price</p>
+                                    <span class="price">$45.00</span>
+                                </li>
+                                <li>
+                                    <p class="visible-xs">Quantity</p>
+                                    <a class="count" href="#">-</a>
+                                    <span>2</span>
+                                    <a class="count" href="#">+</a>
+                                </li>
+                                <li>
+                                    <p class="visible-xs">Total</p>
+                                    <span class="total">$90.00</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="basket-bottom clearfix">
+                            <div class="left">
+                                <a href="#">Add a note to your order</a>
+                            </div>
+                            <div class="right">
+                                <p>Subtotal<b>$225.00</b></p>
+                                <i>Shipping & taxes calculated at checkout</i>
+                                <button href="#">Check Out</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="top-head">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <a class="menu-button visible-xs" href="#"><i class="fa fa-align-justify" aria-hidden="true"></i>Menu</a>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <a href="@Url.Action("SignOut", "User")" class="sign-out-btn pull-right"><i class='fa fa-sign-out' aria-hidden='true'></i></a>
+                        <a class="show-cart-button" href="#"><i class="fa fa-shopping-cart"></i>Cart<span>4</span></a>
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Sign In", "SignIn", "User", null, new { @class = "sign-in-button" })
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

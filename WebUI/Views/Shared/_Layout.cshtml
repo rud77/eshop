@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="The description of my page" />
+    <title>eShop - @ViewBag.Title</title>
+    @if (ViewBag.PageName != null)
+    {
+        ViewBag.StylePath = "~/Assets/css/" + ViewBag.PageName + ".css";
+    }
+    else
+    {
+        ViewBag.StylePath = "~/Assets/css/screen.css";
+    }
+    <link rel="stylesheet" type="text/css" href="@Url.Content(ViewBag.StylePath)" />
+    <script src="~/Assets/js/vendor/modernizr-2.6.2.js"></script>
+</head>
+
+<body>
+
+    <div class="mega-wrapper">
+        @Html.Action("MobileLeftBar")
+
+        <div class="wrapper">
+            @Html.Partial("_TopSection")
+
+            @Html.Action("MobileMenu")
+
+            @Html.Action("Header")
+
+            @RenderSection(name: "Content", required: false)
+        </div>
+
+        @Html.Action("Footer")
+    </div>
+
+    @{
+        string scriptsPath;
+        if (ViewBag.PageName != null && ViewBag.PageName != "about-us" && ViewBag.PageName != "blog" && ViewBag.PageName != "categories")
+        {
+            scriptsPath = "~/bundles/" + ViewBag.PageName;
+        }
+        else
+        {
+            scriptsPath = "~/bundles/default";
+        }
+    }
+    @Scripts.Render(scriptsPath)
+</body>
+</html>

@@ -1,0 +1,22 @@
+﻿@model WebUI.Models.Shared.HeaderVM
+
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <a class="logo" href="/"><img alt="Logo" src="@Url.Content(Model.LogoPath)"></a>
+                <p class="visible-xs">Free shipping on all orders — worldwide</p>
+                <nav class="hidden-xs">
+                    <ul class="clearfix">
+                        @foreach (var item in Model.Menu)
+                        {
+                            <li class="@(item.ActiveClass == true ? "active" : null)">
+                                <a href="@Url.Content("/" + item.ControllerName + "/" + item.ActionName)">@item.Name</a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>

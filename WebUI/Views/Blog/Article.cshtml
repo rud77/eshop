@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Article";
+    ViewBag.PageName = "article";
+}
+
+@model WebUI.Models.Blog.ArticleVM
+
+@section Content {
+    <section class="news-view">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					@Html.Action("LeftBar")
+				</div>
+				<div class="col-sm-9">
+
+					<h1>@Model.Title</h1>
+					<p>@Model.Date.ToString("g")</p>
+                    <p>@Model.Text</p>
+					<div class="share">
+						<div class="addthis_native_toolbox"></div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+}

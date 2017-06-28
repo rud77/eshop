@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "Catalog";
+    ViewBag.PageName = "catalog";
+}
+
+@model WebUI.Models.Catalog.CatalogVM
+
+@section Content {
+    <section class="product-list">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					@Html.Action("LeftBar")
+				</div>
+				<div class="col-sm-9">
+
+					<div class="head clearfix">
+						<h2>Catalog</h2>
+                        <div id="searchBox" class="search-box">
+                            @using (Html.BeginForm(Model.PaginationOptions.Action, Model.PaginationOptions.Controller, FormMethod.Get))
+                            {
+                                @Html.TextBox("searchString", null, new { @placeholder = "Search..." })
+                                @*<input type="text" name="searchString" placeholder="Search...">*@
+                                <button type="submit"></button>
+                            }
+                        </div>
+						<div class="right clearfix">
+							<select id="sorting-list">
+								@foreach (var item in Model.SortingOptions)
+                                {
+                                    <option selected="@(item.IsActive ? "selected" : null)" value="@item.Value">@item.Text</option>
+                                }
+							</select>
+							<span>
+								<a class="grid-view-button active" href="#"><i class="fa fa-th-large"></i></a>
+								<a class="list-view-button" href="#"><i class="fa fa-list"></i></a>
+							</span>
+						</div>
+					</div>
+
+					<ul class="items view-type clearfix">
+                        @if (Model.ProductsList.Count > 0)
+                        {
+                            foreach (var item in Model.ProductsList)
+                            {
+                                <li>
+                                    <a href="@Url.Action("Product", new { productId = item.ProductId })">
+
+                                        @if (item.FavoriteImagePath != null)
+                                        {
+                                            <div class="image" style="background-image: url(@Url.Content(item.FavoriteImagePath))"></div>
+                                        }
+                                        else
+                                        {
+                                            <div class="image no-photo" style="background-image: url(@Url.Content("~/Assets/img/no-photo.svg"))"></div>
+                                        }
+
+                                        <p>@item.Price.ToString("N")</p>
+                                        <h5>@item.ProductName</h5>
+                                    </a>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li>No result.</li>
+                        }
+					</ul>
+
+					@Html.Action("Pagination", new { options = Model.PaginationOptions })
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+    <script type="text/javascript">
+        function SearchAndSort(oVal, sVal) {
+            @{
+                string urlFromBack;
+                switch (Model.PaginationOptions.Action)
+                {
+                    case "Index":
+                        urlFromBack = Url.Action(Model.PaginationOptions.Action, "Catalog", new { page = string.Empty, sortBy = "_oVal_", searchString = "_sVal_" }, Request.Url.Scheme);
+                        break;
+                    case "Brand":
+                        urlFromBack = Url.Action(Model.PaginationOptions.Action, "Catalog", new { brandId = ViewContext.RouteData.Values["brandId"], page = string.Empty, sortBy = "_oVal_", searchString = "_sVal_" }, Request.Url.Scheme);
+                        break;
+                    case "Category":
+                        urlFromBack = Url.Action(Model.PaginationOptions.Action, "Catalog", new { categoryId = ViewContext.RouteData.Values["categoryId"], page = string.Empty, sortBy = "_oVal_", searchString = "_sVal_" }, Request.Url.Scheme);
+                        break;
+                    default:
+                        urlFromBack = Url.Action(Model.PaginationOptions.Action, "Catalog", new { page = string.Empty, sortBy = "_oVal_", searchString = "_sVal_" }, Request.Url.Scheme);
+                        break;
+                }
+            }
+
+            var url = '@urlFromBack'.replace('_oVal_', oVal).replace('_sVal_', sVal);
+
+            window.location.href = url;
+        }
+    </script>
+}

@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Sign Up";
+    ViewBag.PageName = "login";
+}
+
+@model WebUI.Models.User.SignUpVM
+
+@section Content {
+    <section class="login">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-offset-3 col-sm-6">
+					<div class="inner">
+						<h1>Sign Up</h1>
+                        @using (Html.BeginForm("SignUp", "User", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="input-wrap">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    @Html.EditorFor(m => m.UserName, new { htmlAttributes = new { @placeholder = "Username" } })
+                                    @Html.ValidationMessageFor(m => m.UserName)
+                                </div>
+                            </div>
+                            <div class="input-wrap">
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    @Html.PasswordFor(m => m.Password, new { @placeholder = "Password" })
+                                    @Html.ValidationMessageFor(m => m.Password)
+                                </div>
+                            </div>
+                            <div class="input-wrap">
+                                <div class="form-group">
+                                    <label>Confirm password</label>
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @placeholder = "Password" })
+                                    @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                                </div>
+                            </div>
+                            <button class="register-btn" type="submit">Register</button>
+                        }
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+}

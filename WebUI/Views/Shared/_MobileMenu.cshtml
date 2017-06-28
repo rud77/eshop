@@ -1,0 +1,10 @@
+﻿@model List<WebUI.Models.Shared.MenuItemVM>
+
+<ul class="mobile-menu">
+    @foreach (var item in Model)
+    {
+        <li class="@(item.ActiveClass == true ? "active" : null)">
+            <a href="@Url.Content("/" + item.ControllerName + "/" + item.ActionName)">@item.Name</a>
+        </li>
+    }
+</ul>

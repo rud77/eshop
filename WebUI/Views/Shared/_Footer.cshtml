@@ -1,0 +1,21 @@
+﻿@model WebUI.Models.Shared.FooterVM
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="footer-inner clearfix">
+                    <p>Copyright © @DateTime.Now.Year, @Model.WebsiteName. <a href="#">Powered by CompanyName</a></p>
+                    <ul class="social clearfix">
+                        @foreach (var item in Model.Socials)
+                        {
+                            <li>
+                                <a target="_blank" href="@item.Link"><i class="fa @item.Icon"></i></a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

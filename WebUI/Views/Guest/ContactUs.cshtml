@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "ContactUs";
+    ViewBag.PageName = "contact-us";
+}
+
+@model WebUI.Models.Guest.ContactUsVM
+
+@section Content {
+    <section class="contact-us">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					@Html.Action("LeftBar")
+				</div>
+				<div class="col-sm-9">
+					<h1>Contact Us</h1>
+
+					<div class="contact-info">
+						<h2>Contact info</h2>
+						<div class="info-table">
+							<div class="table-row">
+								<div class="table-cell">Address: <span>@Model.Info.Address</span></div>
+								<div class="table-cell">Email: <span>@Model.Info.Email</span></div>
+							</div>
+							<div class="table-row">
+								<div class="table-cell">Phone 1: <span>@Model.Info.Phone1</span></div>
+								<div class="table-cell">Phone 2: <span>@Model.Info.Phone2</span></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-wrapper clearfix">
+						<h2>Send message</h2>
+						@using (Html.BeginForm("ContactUs", "Guest", FormMethod.Post, new { @class = "clearfix" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="input-wrap">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    @Html.EditorFor(m => m.Form.FromName, new { htmlAttributes = new { @placeholder = "Name" } })
+                                    @Html.ValidationMessageFor(m => m.Form.FromName)
+                                </div>
+                            </div>
+                            <div class="input-wrap">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    @Html.EditorFor(m => m.Form.FromEmail, new { htmlAttributes = new { @placeholder = "Email" } })
+                                    @Html.ValidationMessageFor(m => m.Form.FromEmail)
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="textarea-wrap">
+                                <div class="form-group">
+                                    @Html.TextAreaFor(m => m.Form.Message, new { @placeholder = "Enter your message." })
+                                    @Html.ValidationMessageFor(m => m.Form.Message)
+                                </div>
+                            </div>
+                            <button type="submit">Send</button>
+                        }
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+}

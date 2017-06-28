@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "Homepage";
+    ViewBag.PageName = "index";
+}
+
+@model WebUI.Models.Guest.HomepageVM
+
+@section Content {
+    <section class="home">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					@Html.Action("LeftBar")
+				</div>
+				<div class="col-sm-9">
+
+					<ul class="bxslider">
+                        @foreach (var item in Model.SliderImages)
+                        {
+                            <li style="background-image:url(@Url.Content(item))"></li>
+                        }
+					</ul>
+
+					<div class="head clearfix">
+						<h4>FEATURED ITEMS</h4>
+                        @Html.ActionLink("View all Items", "Index", "Catalog", null, new { @class = "hidden-xs" })
+					</div>
+
+					<ul class="items clearfix">
+                        @if (Model.ProductsList.Count > 0)
+                        {
+                            foreach (var item in Model.ProductsList)
+                            {
+                                <li>
+                                    <a href="@Url.Action("Product", "Catalog", new { productId = item.ProductId })">
+                                        @if (item.FavoriteImagePath != null)
+                                        {
+                                            <div class="image" style="background-image: url(@Url.Content(item.FavoriteImagePath))"></div>
+                                        }
+                                        else
+                                        {
+                                            <div class="image no-photo" style="background-image: url(@Url.Content("~/Assets/img/no-photo.svg"))"></div>
+                                        }
+                                        <p>@item.Price.ToString("N")</p>
+                                        <h5>@item.ProductName</h5>
+                                    </a>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li>No result.</li>
+                        }
+					</ul>
+
+                    @Html.ActionLink("View all Items", "Index", "Catalog", null, new { @class = "visible-xs" })
+				</div>
+			</div>
+		</div>
+	</section>    
+}

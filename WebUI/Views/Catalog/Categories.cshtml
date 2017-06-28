@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Categories";
+    ViewBag.PageName = "categories";
+}
+
+@model WebUI.Models.Catalog.CategoriesVM
+
+@section Content {
+    <section class="product-list">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    @Html.Action("LeftBar")
+                </div>
+                <div class="col-sm-9">
+
+                    <div class="head clearfix">
+                        <h2>Categories</h2>
+                    </div>
+
+                    <ul class="items view-type categories-list clearfix">
+                        @if (Model.CategoriesList.Count > 0)
+                        {
+                            foreach (var item in Model.CategoriesList)
+                            {
+                                <li>
+                                    <a href="@Url.Action("Category", new { categoryId = item.CategoryId, page = string.Empty })">
+                                        <h5>@item.CategoryName</h5>
+                                    </a>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li>No result.</li>
+                        }
+                    </ul>
+
+                    @Html.Action("Pagination", new { options = Model.PaginationOptions })
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+}

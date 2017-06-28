@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Edit Aricle";
+}
+
+@model Domain.Entities.Article
+
+<h2>Edit Article</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(m => m.ArticleId)
+
+    <p>
+        @Html.LabelFor(m => m.Title)
+        <br />
+        @Html.EditorFor(m => m.Title)
+        <br />
+        @Html.ValidationMessageFor(m => m.Title)
+    </p>
+    
+
+    <p>
+        @Html.LabelFor(m => m.Text)
+        <br />
+        @Html.TextAreaFor(m => m.Text)
+        <br />
+        @Html.ValidationMessageFor(m => m.Text)
+    </p>
+
+    <button type="submit">Save changes</button>
+}
+
+@Scripts.Render("~/bundles/validation")

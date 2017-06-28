@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Add Article";
+}
+
+@model Domain.Entities.Article
+
+<h2>Add Article</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <p>
+        @Html.LabelFor(m => m.Title)
+        <br />
+        @Html.EditorFor(m => m.Title)
+        <br />
+        @Html.ValidationMessageFor(m => m.Title)
+    </p>
+
+
+    <p>
+        @Html.LabelFor(m => m.Text)
+        <br />
+        @Html.TextAreaFor(m => m.Text)
+        <br />
+        @Html.ValidationMessageFor(m => m.Text)
+    </p>
+
+    <button type="submit">Add post</button>
+}
+
+@Scripts.Render("~/bundles/validation")

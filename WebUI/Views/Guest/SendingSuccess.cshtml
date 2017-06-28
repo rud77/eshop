@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "SendingSuccess";
+}
+
+@section Content {
+    <section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					@Html.Action("LeftBar")
+				</div>
+				<div class="col-sm-9">
+                    <h2>Your message has been sent.</h2>
+                    @Html.ActionLink("Go to Homepage", "Index", "Guest")
+				</div>
+			</div>
+		</div>
+	</section>
+}

@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Blog";
+    ViewBag.PageName = "blog";
+}
+
+@model WebUI.Models.Blog.BlogVM
+
+@section Content {
+    <section class="news-list">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					@Html.Action("LeftBar")
+				</div>
+				<div class="col-sm-9">
+
+					<h1>News</h1>
+
+					<div class="all-news">
+                        @if (Model.ArticlesList.Count > 0)
+                        {
+                            foreach (var item in Model.ArticlesList)
+                            {
+                                <div class="news-item">
+                                    <h2>@Html.ActionLink(item.Title, "Article", "Blog", new { articleId = item.ArticleId }, null)</h2>
+                                    <p>@item.Date.ToString("g")</p>
+                                    <p>@item.Text</p>
+                                    <p>@Html.ActionLink("Read more →", "Article", new { articleId = item.ArticleId }, new { @class = "more" })</p>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <p>No result.</p>
+                        }
+					</div>
+
+                    @Html.Action("Pagination", new { options = Model.PaginationOptions })
+
+				</div>
+			</div>
+		</div>
+	</section>
+}

@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Remove Article";
+}
+
+@model Domain.Entities.Article
+
+<h2>Remove Article</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(m => m.ArticleId)
+
+    <p>
+        @Html.DisplayFor(m => m.Title)
+    </p>
+
+
+    <p>
+        @Html.DisplayFor(m => m.Text)
+    </p>
+
+    <p>
+        @Html.DisplayFor(m => m.Date)
+    </p>
+
+    <button type="submit">Remove post</button>
+}
+
+@Scripts.Render("~/bundles/validation")

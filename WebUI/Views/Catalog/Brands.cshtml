@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Brands";
+    ViewBag.PageName = "brands";
+}
+
+@model WebUI.Models.Catalog.BrandsVM
+
+@section Content {
+    <section class="product-list">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    @Html.Action("LeftBar")
+                </div>
+                <div class="col-sm-9">
+
+                    <div class="head clearfix">
+                        <h2>Brands</h2>
+                    </div>
+
+                    
+                    <ul class="items view-type clearfix">
+                        @if (Model.BrandsList.Count > 0)
+                        {
+                            foreach (var item in Model.BrandsList)
+                            {
+                                <li>
+                                    <a href="@Url.Action("Brand", new { brandId = item.BrandId, page = string.Empty })">
+
+                                        @if (item.BrandImagePath != null)
+                                        {
+                                            <div class="image" style="background-image: url(@Url.Content(item.BrandImagePath))"></div>
+                                        }
+                                        else
+                                        {
+                                            <div class="image no-photo" style="background-image: url(@Url.Content("~/Assets/img/no-photo.svg"))"></div>
+                                        }
+
+                                        <h5>@item.BrandName</h5>
+                                    </a>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li>No result.</li>
+                        }
+                    </ul>
+
+                    @Html.Action("Pagination", new { options = Model.PaginationOptions })
+
+                </div>
+            </div>
+        </div>
+    </section>
+}

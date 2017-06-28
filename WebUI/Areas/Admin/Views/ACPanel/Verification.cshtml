@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Verification";
+}
+
+@model WebUI.Areas.Admin.Models.Verification
+
+@using (Html.BeginForm("Verification", "ACPanel", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <label>Enter verification code.</label>
+    @Html.EditorFor(m => m.Key)
+    <button>Submit</button>
+}

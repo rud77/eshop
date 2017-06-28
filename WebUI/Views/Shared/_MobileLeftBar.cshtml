@@ -1,0 +1,49 @@
+﻿@model WebUI.Models.Shared.LeftBarVM
+
+<div class="toggle-button visible-xs clearfix">
+    <a class="left-menu-icon"></a>
+</div>
+
+<ul class="left-bar-mobile visible-xs">
+    <div class="toggle-button visible-xs clearfix">
+        <a class="left-menu-icon"></a>
+    </div>
+
+    <h4>Categories</h4>
+    <ul class="category">
+        @foreach (var item in Model.CategoriesList)
+        {
+            <li>
+                @Html.ActionLink(item.CategoryName, "Category", "Catalog",
+                                 new { categoryId = item.CategoryId, page = string.Empty },
+                                 new { @class = (string)ViewContext.RouteData.Values["categoryId"] == item.CategoryId.ToString() ? "active" : null })
+            </li>
+        }
+
+        @if (Model.CategoriesList.Count == 5)
+        {
+            <li>
+                @Html.ActionLink("Show more Categories", "Categories", "Catalog", new { page = string.Empty }, new { @class = "show-all" })
+            </li>
+        }
+    </ul>
+
+    <h4>Brands</h4>
+    <ul class="type">
+        @foreach (var item in Model.BrandsList)
+        {
+            <li>
+                @Html.ActionLink(item.BrandName, "Brand", "Catalog",
+                                 new { brandId = item.BrandId, page = string.Empty },
+                                 new { @class = (string)ViewContext.RouteData.Values["brandId"] == item.BrandId.ToString() ? "active" : null })
+            </li>
+        }
+
+        @if (Model.BrandsList.Count == 5)
+        {
+            <li>
+                @Html.ActionLink("Show more Brands", "Brands", "Catalog", new { page = string.Empty }, new { @class = "show-all" })
+            </li>
+        }
+    </ul>
+</ul>

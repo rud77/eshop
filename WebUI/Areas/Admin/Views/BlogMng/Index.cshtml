@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Blog";
+}
+
+@model List<Domain.Entities.Article>
+
+<h2>Blog</h2>
+
+<table border="1">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Title</td>
+            <td>Text</td>
+            <td>Date</td>
+            <td>Actions</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ArticleId</td>
+                <td>@item.Title</td>
+                <td>@item.Text</td>
+                <td>@item.Date.ToString("g")</td>
+                <td>
+                    @Html.ActionLink("Edit", "EditArticle", "BlogMng", new { id = item.ArticleId }, null),
+                    @Html.ActionLink("Remove", "RemoveArticle", "BlogMng", new { id = item.ArticleId }, null)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.ActionLink("Add new post", "AddArticle", "BlogMng")
